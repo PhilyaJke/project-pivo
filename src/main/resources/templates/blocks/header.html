@@ -1,0 +1,58 @@
+<div th:fragment="header">
+    <div>
+        <nav  class="navbar navbar-dark fixed-top" id ="nav">
+            <div class="container-fluid" >
+                <div>
+                    <a class="navbar-brand " href="/" style="color: #F8C202; font-family: 'Gilroy-Heavy', sans-serif; font-size: 30px"><em>ZAPIV.COM</em></a>
+                </div>
+
+                <ul class="nav nav-pills ">
+                    <li class="nav-item" role="presentation" th:if="${user} eq pall">
+                        <!--                            button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Вход</button>-->
+                        <a href="/profile"><button type="button" class="btn"  data-bs-toggle="pill" data-bs-target="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" style="background-color: #78482D">Профиль</button></a>
+                    </li>
+                    <li class="nav-item" role="presentation" th:if="${user} eq null">
+<!--                            button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Вход</button>-->
+                        <a href="/sign/in"><button type="button" class="btn" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" style="background-color: #78482D">Вход</button></a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </li>
+                </ul>
+                </div>
+
+
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Навигация</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/profile">Личный кабинет</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/categories">Категории</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Подкасты</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Пивоварни</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/statistics">Статистика</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/bars">Бары</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        </nav>
+    </div>
+</div>

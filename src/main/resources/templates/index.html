@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--ПОДБОРКИ??-->
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>zapiv.com</title>
+    <link rel="shortcut icon" href="../static/pivo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://fonts.cdnfonts.com/css/american-captain-2" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+</head>
+<style>
+    #nav{
+        background-color: #502F1C;
+    }
+    .colorword{
+        color: #F8C202;
+    }
+    #NewsPic{
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #content {
+        background-color: #693E25;
+        margin-left: auto;
+        margin-right: auto;
+        color: black;
+        max-width: 100%;
+        height: 100%;
+        padding: 5vh 5vh 2vh 5vh;
+    }
+    .clear{ /* Запрет наплывания. Устанавливается для того, чтобы блок контента, при заполнении текстом и изображениями не наплывал на подвал */
+        clear: both;
+    }
+    #footer {
+        height: 10vh;
+        background-color: #502F1C;
+        color: rgb(140,123,112);
+        font-size: 9pt;
+        box-shadow: rgba(0,0,0,0.5) 0px 1px 3px;
+    }
+</style>
+<body>
+
+<div id="content">
+<!--    <header th:insert="blocks/header :: header"></header>-->
+
+    <div>
+        <nav  class="navbar navbar-dark fixed-top" id ="nav" style="height: 70px">
+            <div class="container-fluid" >
+                <div>
+                    <a class="navbar-brand " href="/" style="color: #F8C202; font-family: 'Gilroy-Heavy', sans-serif; font-size: 30px"><em>ZAPIV.COM</em></a>
+                    <p th:text="${day}" style="font-size: 13px; margin-top: -10px; color: #F8C202; font-family: 'Gilroy-Heavy', sans-serif;"></p>
+                </div>
+
+                <ul class="nav nav-pills " style="margin-top: -20px; left: 3vh">
+                    <li class="nav-item" role="presentation" th:if="${user} eq pall">
+                        <!--                            button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Вход</button>-->
+                        <a href="/profile"><button type="button" class="btn"  data-bs-toggle="pill" data-bs-target="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" style="background-color: #78482D">Профиль</button></a>
+                    </li>
+                    <li class="nav-item" role="presentation" th:if="${user} eq null">
+                        <!--                            button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Вход</button>-->
+                        <a href="/sign/in"><button type="button" class="btn" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" style="background-color: #78482D">Вход</button></a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Навигация</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/profile">Личный кабинет</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/categories">Категории</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Подкасты</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Пивоварни</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/statistics">Статистика</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/bars">Бары</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <p style="font-family: 'Gill Sans', sans-serif; color: #ffffff; font-size: 30px; margin-top: 50px; font-weight: bolder"><span class="colorword">ХОРОШИЕ</span><br>ЛЮДИ ПЬЮТ<br><span class="colorword">ХОРОШЕЕ</span> ПИВО</p>
+
+    <div>
+        <p style="color: #ffffff; margin-bottom: 10px">Мы создаëм <span class="colorword">настроение</span>, настроение каждому, кто так же как и мы <span class="colorword">любит</span> пить <span class="colorword">пиво</span>.</p>
+        <p style="margin-bottom: 10px"><span class="colorword">Как же мы это делаем?</span></p>
+        <p style="color: #ffffff; margin-bottom: 5px">На нашем сайте вы можете найти <span class="colorword">любое</span> пиво, которое только может себе представить. Мы бережно модерируем отзывы, чтобы вы, наши друзья, смогли без труда <span class="colorword">выбрать</span> бутылочку пенного для себя или своих близких. Наглядные рейтинги, информативные отзывы и интуитивный интерфейс оставят в вашей памяти приятные эмоции о нашем сайте и вы обязательно зайдëте к нам снова, чтобы в очередной раз <span class="colorword">не ошибиться с выбором</span></p>
+        <p style="color: #ffffff">Пробуйте новое для себя пиво вместе с нами!</p>
+    </div>
+
+
+<!--    <p id="NewsPic" align="center">-->
+<!--        <img src="../../static/newspic.jpg" style="max-width: 200px; margin-top: 3vh">-->
+<!--    </p>-->
+
+    <h1 style="font-family: 'Gill Sans', sans-serif; font-weight: bold; color: #ffffff; margin-top: 7vh; margin-bottom: 2vh">НОВОСТИ</h1>
+
+    <div class="card mb-3" style="border: 2.5px solid rgb(164,104,69); border-radius: 12px; background-color: #693E25" th:each="el: ${articles}">
+        <div class="row g-0">
+            <div class="col-md-20">
+                <div class="card-body">
+                    <p style="color: rgb(164,104,69);" th:text="${el.data}"></p>
+                    <h5 class="card-title" style="color: #ffffff" th:text="${el.title}"></h5>
+                    <p class="card-text" style="color: #ffffff" th:text="${el.anons}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a hred="/"><button style="font-family: 'Gill Sans', sans-serif; font-weight: 700; color: #693E25; background-color: #F8C202; border: none; border-radius: 5px">Все новости сайта</button></a>
+
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>zapiv.com</title>
+    <link rel="shortcut icon" href="../static/pivo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://fonts.cdnfonts.com/css/american-captain-2" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+</head>
+<style>
+    #nav{
+        background-color: #502F1C;
+    }
+    .colorword{
+        color: #F8C202;
+    }
+    #NewsPic{
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #content {
+        background-color: #693E25;
+        margin-left: auto;
+        margin-right: auto;
+        color: black;
+        max-width: 100%;
+        height: 100%;
+        padding: 5vh 5vh 2vh 5vh;
+    }
+    .clear{ /* Запрет наплывания. Устанавливается для того, чтобы блок контента, при заполнении текстом и изображениями не наплывал на подвал */
+        clear: both;
+    }
+    #footer {
+        height: 10vh;
+        background-color: #502F1C;
+        color: rgb(140,123,112);
+        font-size: 9pt;
+        box-shadow: rgba(0,0,0,0.5) 0px 1px 3px;
+    }
+</style>
+<body>
+
+<div id="content">
+    <header th:insert="blocks/header :: header"></header>
+
+    <h1 style="margin-bottom: 7vh; margin-top: 7vh; font-family: 'Gill Sans', sans-serif; font-weight: bold; color: #ffffff; font-size: 22pt">КАКОЕ <span style="color: #F8C202">ПИВО</span><br>ТЫ БУДЕШЬ<br><span style="color: #F8C202">ПИТЬ СЕГОДНЯ?</span></h1>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col" th:each="el: ${beers}" style="width: 50%;">
+            <div class="card" style="background-color: #FFFFFF; border: 2.5px solid rgb(164,104,69); border-radius: 12px;">
+                <div style="height: 180px; align-items: center; align-self: center; align-content: center; margin-bottom: 2vh">
+                    <a th:href="'/categories/.../'+${el.nameOfThebeer}" style="color: black; text-decoration: none"><p align="center"><img th:src="'/img/'+${el.filename}" style="max-width: 100%; margin-top: 2vh" alt="..."></p></a>
+                </div>
+                <div class="card-body" style="margin-top: 7vh; background-color: rgb(164,104,69); height: 5vh">
+                    <a th:href="'/categories/.../'+${el.nameOfThebeer}" style="color: black; font-family: 'Gill Sans', sans-serif; text-decoration: none; margin-bottom: 2vh"><h6 class="card-title" align="center" th:text="${el.nameOfThebeer}"></h6></a>
+                </div>
+            </div>
+        </div>
+    </div>
+<div style="margin-bottom: 80vh"></div>
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>

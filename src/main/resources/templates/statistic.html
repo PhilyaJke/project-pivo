@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--ПОДБОРКИ??-->
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>zapiv.com</title>
+  <link rel="shortcut icon" href="../static/pivo.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link href="https://fonts.cdnfonts.com/css/american-captain-2" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+</head>
+<style>
+  #nav{
+    background-color: #502F1C;
+  }
+  .colorword{
+    color: #F8C202;
+  }
+  #NewsPic{
+    margin-right: auto;
+    margin-left: auto;
+  }
+  #content {
+    background-color: #693E25;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+    width: 100%;
+    height: 100%;
+    padding: 5vh 5vh 2vh 5vh;
+  }
+  .clear{ /* Запрет наплывания. Устанавливается для того, чтобы блок контента, при заполнении текстом и изображениями не наплывал на подвал */
+    clear: both;
+  }
+  #footer {
+    height: 10vh;
+    background-color: #502F1C;
+    color: rgb(140,123,112);
+    font-size: 9pt;
+    box-shadow: rgba(0,0,0,0.5) 0px 1px 3px;
+  }
+  .border1 {
+    list-style: none;
+    padding: 0;
+  }
+  .border1 li {
+    font-family: "Trebuchet MS", "Lucida Sans";
+    padding: 7px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-left: 10px solid #f05d22;
+    box-shadow: 2px -2px 5px 0 rgba(0,0,0,.1),
+    -2px -2px 5px 0 rgba(0,0,0,.1),
+    2px 2px 5px 0 rgba(0,0,0,.1),
+    -2px 2px 5px 0 rgba(0,0,0,.1);
+    font-size: 20px;
+    letter-spacing: 2px;
+    transition: 0.3s all linear;
+    background-color: rgb(164,104,69);
+  }
+  .border1 li:nth-child(1){border-color: rgb(164,104,69);}
+  .border1 li:nth-child(2){border-color: rgb(164,104,69);}
+  .border1 li:nth-child(3){border-color: rgb(164,104,69);}
+  .border1 li:nth-child(4){border-color: rgb(164,104,69);}
+  .border1 li:nth-child(5){border-color: rgb(164,104,69);}
+
+
+</style>
+<body>
+<div id="content">
+
+  <header th:insert="blocks/header :: header"></header>
+
+  <h2 style="margin-top: 10vh; font-family: 'Gill Sans', sans-serif; font-weight: bold; color: #F8C202;">ЧЕМ МЫ НЕ МОЖЕМ ПОХВАСТАТЬСЯ</h2>
+
+  <div style="max-width: 800px; margin-left: auto; margin-right: auto">
+    <div class="card-body">
+      <ul class = "border1" style="margin: auto;" th:each="el: ${statistic}">
+        <li th:text="${el.data} + ' дней мы работаем'" style="font-family: 'Gill Sans', sans-serif;"></li>
+        <li th:text="${el.countUsers} + ' пользователей зарегестрировано'" style="font-family: 'Gill Sans', sans-serif;"></li>
+        <li th:text="${el.countComments} + ' обзоров написано'" style="font-family: 'Gill Sans', sans-serif;"></li>
+        <li th:text="${el.countReviews} + ' пива на сайте'" style="font-family: 'Gill Sans', sans-serif;"></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div style="margin-top: 10vh">
+    <h4 style="font-family: 'Gill Sans', sans-serif; font-weight: bold; color: #F8C202;">График роста цен на пиво</h4>
+
+        <p align="center"> <img src="../static/chart.jpg" style="margin-top: 10px; max-width: 100%; border-radius: 6px; border: 1.5px solid black; box-shadow: rgba(0,0,0,0.5) 0px 1px 3px; position: relative"> </p>
+        <div style="max-width: 700px; margin: auto">
+          <p align="justify" style="color: #FFFFFF; font-family: 'Gill Sans', sans-serif;" >Наши экономисты провели тщательный анализ рынка пивных напитков начиная с 2019 года по 2022. В ходе сложных математических подсчетов
+            было выявлено - цена на пиво растет с каждым годом. Наша команда была в шоке от полученных результатов, хотелось плакать и скупать все пиво с полок,
+            пока оно не подорожало еще больше. "Пей пиво сейчас - потом будет дороже" - именно после этих слов Виктора Цеслюкевича
+            (любитель Hooch), мы пошли в магазин и скупили более 40 банок различного пива.
+            Также хочется заметить, что пиво - отличное вложение капитала. В среднем цена на пиво растет на 12-13% в год, что является отличным показателем, в
+            сравнении с инвестициями в недвижимость или авто. Наша рекомендация касательно пива - <span style="color: #F8C202;">ПОКУПАТЬ</span>.
+          </p>
+          <p class="card-text" align="right" style="color: #F8C202"><small><em>Команда Zapiv.com</em></small></p>
+
+    </div>
+
+
+  </div>
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+</body>
+</html>

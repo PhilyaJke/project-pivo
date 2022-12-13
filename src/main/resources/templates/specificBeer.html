@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>zapiv.com</title>
+    <link rel="shortcut icon" href="../static/pivo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://fonts.cdnfonts.com/css/american-captain-2" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+</head>
+<style>
+    #nav{
+        background-color: #502F1C;
+    }
+    .colorword{
+        color: #F8C202;
+    }
+    #NewsPic{
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #content {
+        background-color: #693E25;
+        margin-left: auto;
+        margin-right: auto;
+        color: black;
+        width: 100%;
+        height: 100%;
+        padding: 5vh 5vh 2vh 5vh;
+    }
+    .clear{ /* Запрет наплывания. Устанавливается для того, чтобы блок контента, при заполнении текстом и изображениями не наплывал на подвал */
+        clear: both;
+    }
+    #footer {
+        height: 10vh;
+        background-color: #502F1C;
+        color: rgb(140,123,112);
+        font-size: 9pt;
+        box-shadow: rgba(0,0,0,0.5) 0px 1px 3px;
+    }
+
+    .okno {
+        background-color: rgb(164,104,69);
+        overflow-y: scroll;
+        overflow-x: hidden;
+        width: 90%;
+        height: 80%;
+        padding: 2px;
+        border: 3px solid black;
+        border-radius: 4px;
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin-top: 10vh;
+        margin-left: auto;
+        margin-right: auto;
+        /*margin: auto;*/
+        bottom: 10vh;
+    }
+    .okno:target {display: block;}
+
+    ::-webkit-input-placeholder { /* WebKit browsers */
+        color:    black;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color:    black;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color:    black;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10+ */
+        color:    black;
+    }
+</style>
+<body>
+
+<div id="content">
+
+    <header th:insert="blocks/header :: header"></header>
+
+    <div style="margin-top: 5vh; background-color: #A78B71; border-radius: 4px; max-width: 275px; margin-right: auto; margin-left: auto; align-content: center">
+        <a href="#okno1"><button type="button" class="btn" style="background-color: #A78B71">Пиво</button></a>
+        <a href="#okno2"><button type="button" class="btn" style="background-color: #A78B71">Где купить?</button></a>
+        <a href="#okno3"><button type="button" class="btn" style="background-color: #A78B71">Отзывы</button></a>
+    </div>
+
+    <div style="margin-bottom: 80vh"></div>
+
+    <div class="okno card mb-3" style="max-width: 25rem; border: 2.5px solid #502F1C; border-radius: 12px" id="okno1">
+        <div class="card-body">
+            <p align="right"><a href="#" ><img src="/static/krest.png" style="max-width: 30px;"></a></p>
+            <div th:each="el: ${specificbeer}">
+                <div style="width: 80%; border-bottom: 1px solid black; padding: 0.5vh">
+                    <h3 th:text="${el.nameOfThebeer}" align="left"></h3>
+                </div>
+                <div style="width: 90%; border: 2.5px solid #502F1C; border-radius: 12px; background-color: #FFFFFF; margin-top: 1.5vh; margin-bottom: 1.5vh; margin-right: auto; margin-left: auto">
+                    <p align="center"><img th:src="'/img/' + ${el.filename}" style="max-width: 100px; margin-top: 5vh; margin-bottom: 5vh"></p>
+                </div>
+                <h4>Описание</h4>
+                <p th:text="${el.shortReview}"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="okno card mb-3" style="max-width: 25rem; border: 2.5px solid #502F1C; border-radius: 12px" id="okno2">
+        <div class="card-body">
+            <p align="right"><a href="#" class="close"><img src="/static/krest.png" style="max-width: 30px"></a></p>
+        </div>
+    </div>
+
+    <div class="okno card mb-3" style="max-width: 25rem; border: 2.5px solid #502F1C; border-radius: 12px" id="okno3">
+        <div class="card-body">
+            <p align="right"><a href="#" class="close"><img src="/static/krest.png" style="max-width: 30px; left: 1vh; bottom: 2vh"></a></p>
+            <p align="center"><img src="/static/TwoBottles.png" style="max-width: 200px; bottom: 4vh"></p>
+            <form th:action="'/categories/.../'+${nameOfThebeer}" method="post" style="margin-bottom: 7vh;" align="center">
+                <textarea type="text" name="text" style="width: 80%; height: 30px ; margin-top: 10vh; background: none; border: none; border-bottom: 1px solid #502F1C; color: #F8C202" placeholder="Поделись своим мнением!" required></textarea>
+                <button type="submit" class="btn btn-sm" style="font-family: 'Gill Sans', sans-serif; font-weight: bold; width: 80%; background-color: #F8C202; color: #502F1C">Отправить</button>
+            </form>
+            <div class="card border-dark mb-3" style="max-width: 18rem; margin-right: auto; margin-left: auto; margin-top: 3vh; background-color: #A78B71;" th:each="el: ${comment}">
+                <div class="card-header">
+                    <p th:text="${el.author}" style="display: inline"></p>
+                    <p th:text="${el.authorRank}" style="display: inline"></p>
+                </div>
+                <div class="card-body text-dark">
+                    <p class="card-text" th:text="${el.text}"></p>
+                    <p class="card-text" align="right"><small th:text="${el.data}"></small></p>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>

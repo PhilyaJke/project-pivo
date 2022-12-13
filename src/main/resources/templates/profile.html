@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!--ПОДБОРКИ??-->
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>zapiv.com</title>
+    <link rel="shortcut icon" href="../static/pivo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://fonts.cdnfonts.com/css/american-captain-2" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+</head>
+<style>
+    #nav{
+        background-color: #502F1C;
+    }
+    .colorword{
+        color: #F8C202;
+    }
+    #NewsPic{
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #content {
+        background-color: #693E25;
+        margin-left: auto;
+        margin-right: auto;
+        color: black;
+        width: 100%;
+        height: 100%;
+        padding: 5vh 5vh 2vh 5vh;
+    }
+    .clear{ /* Запрет наплывания. Устанавливается для того, чтобы блок контента, при заполнении текстом и изображениями не наплывал на подвал */
+        clear: both;
+    }
+    #footer {
+        height: 10vh;
+        background-color: #502F1C;
+        color: rgb(140,123,112);
+        font-size: 9pt;
+        box-shadow: rgba(0,0,0,0.5) 0px 1px 3px;
+    }
+</style>
+<body>
+<div id="content">
+    <div>
+        <nav  class="navbar navbar-dark fixed-top" id ="nav">
+            <div class="container-fluid" >
+                <a class="navbar-brand " href="/" style="color: #F8C202; font-family: 'Gilroy-Heavy', sans-serif; font-size: 30px"><em>ZAPIV.COM</em></a>
+                <div>
+                    <ul class="nav nav-pills " >
+                        <li class="nav-item" role="presentation" th:if="${user} eq null">
+                            <a href="/sign/in"><button type="button" class="btn" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" style="background-color: saddlebrown">Вход</button></a>
+                        </li>
+                        <li class="nav-item" role="presentation" th:if="${user} eq pall">
+                            <form action="/logout" method="POST" align="right">
+                                <button type="submit" class="btn" style="background-color: #78482D"> Выйти </button>
+                            </form>
+                        </li>
+                        <li class="nav-item px-2">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Навигация</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/profile">Личный кабинет</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/categories">Категории</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Подкасты</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Пивоварни</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Статистика</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/bars">Бары</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div style="width: 100%; margin-top: 10vh; margin-left: auto; margin-right: auto">
+        <div th:each="el: ${userProfileInfo}">
+            <h5 class="card-title colorword" th:text="'Привет, ' + ${el.username}+'!'"></h5>
+            <table>
+                <tr>
+                    <td style="width: 20vh; color: #FFFFFF; font-family: 'Gill Sans',sans-serif">Зарегестрирован</td>
+                    <td style="width: 30vh; color: #FFFFFF; font-weight: bold; font-family: 'American Captain',sans-serif" th:text="${el.data}" align="right"></td>
+                </tr>
+                <br>
+                <tr>
+                    <td style="width: 20vh; color: #FFFFFF; font-family: 'Gill Sans',sans-serif">Обзоров написано</td>
+                    <td style="width: 30vh; color: #FFFFFF; font-weight: bold; font-family: 'American Captain',sans-serif" th:text="${el.countOfRev}" align="right"></td>
+                </tr>
+                <br>
+                <tr>
+                    <td style="width: 20vh; color: #FFFFFF; font-family: 'Gill Sans',sans-serif">Звание</td>
+                    <td style="width: 30vh; color: #FFFFFF; font-weight: bold; font-family: 'American Captain',sans-serif" th:text="${el.rank}" align="right"></td>
+                </tr>
+            </table>
+            <form action="/profile" method="post" style="margin-bottom: 2vh" align="left">
+                <input type="text" name="password" style="width: 100%; height: 30px ;background: none; border: none; border-bottom: 1px solid rgb(164,104,69)" placeholder="Новый пароль" required>
+                <button type="submit" class="btn btn-sm" style="width: 50%; background-color: #F8C202; margin-top: 0.5vh">Изменить пароль</button>
+            </form>
+            <form action="/profile" method="post" style="margin-bottom: 10vh;" align="left" enctype="multipart/form-data">
+                <td><p align="left"><img th:src="'/img/'+${el.filename}" style="width: 100px; border-radius: 200px; float: left; border: 1px solid black;"></p></td>
+                <input type="file" name="avatar" style="width: 135px; margin-left: 2vh; margin-top: 3vh">
+                <p><button type="submit" class="btn btn-sm" style="width: 150px; background-color: #F8C202; margin-top: 0.5vh;  margin-left: 2vh">Добавить фото</button></p>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <h1 style="font-family: 'Gill Sans', sans-serif; font-weight: bold; color: #ffffff; margin-top: 10vh; margin-bottom: 2vh">Найди своего подпивасника</h1>
+        <form action="/profile" method="post" style="margin-bottom: 7vh" align="left">
+            <input type="text" name="usersFriend" style="width: 100%; height: 30px ;background: none; border: none; border-bottom: 1px solid rgb(164,104,69)" placeholder="Имя друга" required>
+            <button type="submit" class="btn btn-sm" style="width: 50%; background-color: #F8C202; margin-top: 0.5vh">Добавить</button>
+        </form>
+        <div style="width: 95%; background-color: #693E25; margin-left: auto; margin-right: auto">
+            <h3 style="font-family: 'Gill Sans', sans-serif; font-weight: bold; color: #F8C202; margin-top: 2vh; margin-bottom: 2vh" align="left">ТВОИ СОБУТЫЛЬНИКИ</h3>
+
+            <div style="width: 100%; height: 500px; border: 1px solid black; overflow-x: hidden; overflow-y: scroll">
+                <div th:each="el: ${friends}">
+                    <div style="border: 1px solid black">
+                        <h4 th:text="${el.username}" style="font-family: 'Gill Sans', sans-serif; font-weight: bold; color: #FFFFFF; margin-top: 1vh; margin-bottom: 1vh" align="center"></h4>
+                        <div>
+                            <div>
+                            <img src="../static/friends.jpg" style="width: 100px; height: 150px; border-radius: 50px;border: 1px solid black; margin-left: 2vh; margin-bottom: 2vh; float: left">
+<!--                                <table>-->
+<!--                                    <tr>-->
+<!--                                        <td>Время: </td>-->
+<!--                                        <td>Инфа инфа инфа</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>Место: </td>-->
+<!--                                        <td>Инфа инфа инфа</td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td>Сообщение:</td>-->
+<!--                                        <td>Инфа инфа инфа Инфа инфа инфа Инфа инфа инфа Инфа инфа инфа</td>-->
+<!--                                    </tr>-->
+<!--                                </table>-->
+                            </div>
+                            <p style="width: 20vh; color: #FFFFFF; font-family: 'Gill Sans',sans-serif; font-size: 12pt; margin-left: 2vh">Назначить встречу</p>
+                            <form action="/profile" method="post" style="margin-bottom: 2vh; margin-left: 2vh">
+                                <input type="text" name="usersFriend" style="width: 55%; height: 30px ;background: none; border: none; border-bottom: 1px solid rgb(164,104,69)" placeholder="Дата" required>
+                                <input type="text" name="usersFriend" style="width: 55%; height: 30px ;background: none; border: none; border-bottom: 1px solid rgb(164,104,69)" placeholder="Место" required>
+                                <input type="text" name="usersFriend" style="width: 95%; height: 30px ;background: none; border: none; border-bottom: 1px solid rgb(164,104,69)" placeholder="Сообщение (макс. 10 слов)" required>
+                                <button type="submit" class="btn btn-sm" style="width: 95%; background-color: #F8C202; margin-top: 0.5vh">Добавить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+</body>
+</html>
