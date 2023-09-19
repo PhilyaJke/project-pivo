@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SecurityConfig(@Qualifier("userDetailServiceImpl") UserDetailsService userDetailsService) {
+    public SecurityConfig(@Qualifier(value = "userDetailServiceImpl") UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 

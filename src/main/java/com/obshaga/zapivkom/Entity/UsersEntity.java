@@ -2,6 +2,7 @@ package com.obshaga.zapivkom.Entity;
 
 
 import lombok.Data;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -41,12 +42,15 @@ public class UsersEntity{
     private Rank rank;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersEntity")
     private List<CommentEntity> commentEntityList;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @Column(name = "user")
     private List<UsersEntity> usersEntityList;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "friends")
     private UsersEntity user;
+
     @Column(name = "filename")
     private String filename;
 
